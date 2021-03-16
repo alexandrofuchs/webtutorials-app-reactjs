@@ -1,11 +1,12 @@
 import Routes from './routes';
-
+import Blog from './containers/Home';
 function App() {
 
   return (
     <div className="App">
       <header className="App-header">
-        <Routes />
+        <Blog />
+        {/* <Routes /> */}
       </header>
     </div>
   );
