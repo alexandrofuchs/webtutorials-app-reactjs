@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import styles from './styles';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -6,11 +6,14 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import Typography from '@material-ui/core/Typography';
-import Link from '@material-ui/core/Link';
+import Avatar from '@material-ui/core/Avatar';
+import { Link } from 'react-router-dom';
+import { useAuthenticate } from '../../contexts/UserContext';
 
 export default function Header(props) {
   const classes = styles();
   const { sections, title } = props;
+  const { signed, loading } = useAuthenticate();
 
   return (
     <React.Fragment>
@@ -26,26 +29,21 @@ export default function Header(props) {
         >
           {title}
         </Typography>
-        <IconButton>
-          <SearchIcon />
-        </IconButton>
-        <Button variant="outlined" size="small">
-          Sign up
-        </Button>
-      </Toolbar>
-      <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
-        {sections.map((section) => (
-          <Link
-            color="inherit"
-            noWrap
-            key={section.title}
-            variant="body2"
-            href={section.url}
-            className={classes.toolbarLink}
-          >
-            {section.title}
-          </Link>
-        ))}
+        {
+          signed ?
+            <div>
+              <Button variant="outlined" size="small" >
+                Logout
+              </Button>
+              <Avatar>A</Avatar>
+            </div>
+            :
+            <div>
+              <Link to="/signin">Sign In</Link>
+              |
+              <Link to="/signup">Sign Up</Link>
+            </div>
+        }
       </Toolbar>
     </React.Fragment>
   );

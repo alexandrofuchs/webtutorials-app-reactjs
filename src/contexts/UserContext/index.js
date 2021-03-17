@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const AuthenticateContext = createContext({
-    signed: true,
+    signed: false,
     loading: false,
 });
 
@@ -20,7 +20,7 @@ export default function AuthenticateProvider({ children }) {
     }
 
     return (
-        <AuthenticateContext.Provider value={{ signed: true, loading }}>
+        <AuthenticateContext.Provider value={{ signed: false, loading }}>
             {children}
         </AuthenticateContext.Provider>
     )
