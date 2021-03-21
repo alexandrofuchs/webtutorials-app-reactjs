@@ -1,16 +1,16 @@
-import { Switch, Route, Redirect} from 'react-router-dom';
 import React from 'react';
+import { Switch, Route } from 'react-router-dom';
+import CommonRoutes from '../CommonRoutes';
 import SignInPage from '../../pages/SignInPage';
 import SignUpPage from '../../pages/SignUpPage';
-import HomePage from '../../pages/HomePage';
+
 
 export default function PublicRoutes() {
     return (
         <Switch>
-            <Route exact path='/' component={HomePage} />
             <Route path='/signin' component={SignInPage} />
             <Route path='/signup' component={SignUpPage} />
-            <Redirect to={{ pathname: '/signin' }} />
+            <Route path='*' component={CommonRoutes} />
         </Switch>
     )
 }

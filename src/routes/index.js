@@ -7,10 +7,11 @@ import { useAuthenticate } from '../contexts/UserContext';
 
 export default function Routes() {
     const { signed, loading } = useAuthenticate();
+    
     if (loading) {
         return <LoadingPage />
-    }
-    return (
+    }    
+    return (        
         <BrowserRouter>
             {signed ? <ProtectedRoutes /> : <PublicRoutes />}
         </BrowserRouter>

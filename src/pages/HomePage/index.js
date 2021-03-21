@@ -1,24 +1,16 @@
 import * as React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Grid from '@material-ui/core/Grid';
-import Container from '@material-ui/core/Container';
-import GitHubIcon from '@material-ui/icons/GitHub';
-import FacebookIcon from '@material-ui/icons/Facebook';
-import TwitterIcon from '@material-ui/icons/Twitter';
+import { makeStyles, CssBaseline, Card, Divider, Grid } from '@material-ui/core';
+import {
+    GitHub as GitHubIcon,
+    Facebook as FacebookIcon,
+    Twitter as TwitterIcon
+} from '@material-ui/icons';
 import Header from '../../containers/Header';
 import MainFeaturedPost from '../../containers/MainFeaturedPost';
 import FeaturedPost from '../../containers/FeaturePost';
 import Main from '../../containers/Main';
 import Sidebar from '../../containers/Sidebar';
 import Footer from '../../containers/Footer';
-
-const useStyles = makeStyles((theme) => ({
-    mainGrid: {
-        marginTop: theme.spacing(3),
-    },
-}));
-
 
 const courses = [
     { title: 'Programação', url: '#' },
@@ -28,18 +20,11 @@ const courses = [
 ]
 
 const sections = [
-    { title: 'Technology', url: '#' },
-    { title: 'Design', url: '#' },
-    { title: 'Culture', url: '#' },
-    { title: 'Business', url: '#' },
-    { title: 'Politics', url: '#' },
-    { title: 'Opinion', url: '#' },
-    { title: 'Science', url: '#' },
-    { title: 'Health', url: '#' },
-    { title: 'Style', url: '#' },
-    { title: 'Travel', url: '#' },
+    { title: 'Engenharia de Software', url: '#' },
+    { title: 'Desenvolvimento', url: '#' },
+    { title: 'Ciência dos Dados', url: '#' },
+    { title: 'Inteligencia Artificial', url: '#' },
 ];
-
 
 const mainFeaturedPost = {
     title: 'Title of a longer featured blog post',
@@ -82,39 +67,36 @@ const sidebar = {
     ],
 };
 
-
-
 function HomePage() {
-    const classes = useStyles();
-
     return (
-        <React.Fragment>
+        <div className="HomePage">
             <CssBaseline />
-            <Container maxWidth="lg">
-                <Header title="Web Streaming Application" sections={sections} />
-                <main>
-                    <MainFeaturedPost post={mainFeaturedPost} />
-                    <Grid container spacing={4}>
+            <Header title="Web Streaming Application" sections={sections} />
+            <main className="Main">
+                <Divider>
+                          {/* <MainFeaturedPost post={mainFeaturedPost} /> 
+                <Grid container spacing={4}>
                         {featuredPosts.map((post) => (
                             <FeaturedPost key={post.title} post={post} />
                         ))}
-                    </Grid>
-                    <Grid container spacing={5} className={classes.mainGrid}>
-                        <Main title="Cursos" posts={posts} />
-                        <Sidebar
-                            title={sidebar.title}
-                            description={sidebar.description}
-                            archives={sidebar.archives}
-                            social={sidebar.social}
-                        />
-                    </Grid>
-                </main>
-            </Container>
+                </Grid>           */}
+                </Divider>
+      
+                <Card className="Card">
+                     <Main title="Cursos" posts={posts} />            
+                </Card>
+                <Sidebar
+                        title={sidebar.title}
+                        description={sidebar.description}
+                        social={sidebar.social}
+                />                
+            </main>
+            <Divider />
             <Footer
                 title="Footer"
                 description="Something here to give the footer a purpose!"
             />
-        </React.Fragment>
+        </div>
     );
 }
 export default HomePage

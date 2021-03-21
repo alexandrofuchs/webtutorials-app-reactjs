@@ -18,7 +18,7 @@ function Main(props) {
   const { posts, title } = props;
 
   return (
-    <Grid item xs={12} md={8}>
+    <>
       <Typography variant="h6" gutterBottom>
         {title}
       </Typography>
@@ -28,7 +28,7 @@ function Main(props) {
           {post}
         </Markdown>
       ))}
-    </Grid>
+    </>
   );
 }
 

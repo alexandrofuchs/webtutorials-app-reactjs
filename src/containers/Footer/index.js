@@ -18,21 +18,11 @@ function Copyright() {
   );
 }
 
-const useStyles = makeStyles((theme) => ({
-  footer: {
-    backgroundColor: theme.palette.background.paper,
-    // marginTop: theme.spacing(8),
-    padding: theme.spacing(6, 0),
-  },
-}));
-
 function Footer(props) {
-  const classes = useStyles();
   const { description, title } = props;
 
   return (
-    <footer className={classes.footer}>
-      <Container maxWidth="lg">
+    <footer className="Footer">      
         <Typography variant="h6" align="center" gutterBottom>
           {title}
         </Typography>
@@ -45,7 +35,6 @@ function Footer(props) {
           {description}
         </Typography>
         <Copyright />
-      </Container>
     </footer>
   );
 }

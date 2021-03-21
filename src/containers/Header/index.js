@@ -1,14 +1,17 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './styles';
-import Toolbar from '@material-ui/core/Toolbar';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import SearchIcon from '@material-ui/icons/Search';
-import Typography from '@material-ui/core/Typography';
-import Avatar from '@material-ui/core/Avatar';
-import { Link } from 'react-router-dom';
+import {
+  Toolbar,
+  Button,
+  Typography,
+  Avatar,
+  Link
+} from '@material-ui/core';
+import { Link as RouteLink } from 'react-router-dom';
 import { useAuthenticate } from '../../contexts/UserContext';
+
+
 
 export default function Header(props) {
   const classes = styles();
@@ -16,7 +19,7 @@ export default function Header(props) {
   const { signed, loading } = useAuthenticate();
 
   return (
-    <React.Fragment>
+      <div className="Header">
       <Toolbar className={classes.toolbar}>
         <Button size="small">Subscribe</Button>
         <Typography
@@ -32,20 +35,34 @@ export default function Header(props) {
         {
           signed ?
             <div>
-              <Button variant="outlined" size="small" >
+              <Button variant="outlined" size="small">
                 Logout
               </Button>
               <Avatar>A</Avatar>
             </div>
             :
             <div>
-              <Link to="/signin">Sign In</Link>
+              <Button href="/signin">Sign In</Button>
               |
-              <Link to="/signup">Sign Up</Link>
+              <Button href="/signup">Sign Up</Button>
             </div>
         }
       </Toolbar>
-    </React.Fragment>
+      <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
+        {sections.map((section) => (
+          <Link
+            color="inherit"
+            noWrap
+            key={section.title}
+            variant="body2"
+            href={section.url}
+            className={classes.toolbarLink}
+          >
+            {section.title}
+          </Link>
+        ))}
+      </Toolbar>
+    </div>
   );
 }
 

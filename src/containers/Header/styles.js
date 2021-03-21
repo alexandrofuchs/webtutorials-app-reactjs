@@ -1,6 +1,11 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
+    root:{
+      display: '',
+      width: '100%',
+      height: 300
+    },  
     toolbar: {
       borderBottom: `1px solid ${theme.palette.divider}`,
     },

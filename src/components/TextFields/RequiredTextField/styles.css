@@ -1,0 +1,10 @@
+.RequiredTextField{
+    display: flex;
+    flex-direction: column;
+}
+
+.ErrorMessage{
+    color: red;
+    font-size: 12px;
+    font-weight: bold;
+}

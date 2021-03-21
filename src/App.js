@@ -1,12 +1,13 @@
-
 import Routes from './routes';
+import './styles.css';
+import AuthenticateProvider from './contexts/UserContext';
 
-function App() {
+export default function App() {
   return (
-    <div className="App">     
-        <Routes/>
+    <div className="App">
+      <AuthenticateProvider>
+        <Routes />
+      </AuthenticateProvider>
     </div>
   );
 }
-
-export default App;
