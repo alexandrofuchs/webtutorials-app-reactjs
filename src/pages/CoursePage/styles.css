@@ -1,0 +1,26 @@
+.coursePage-root { 
+    display: flex;  
+    flex-direction: row; 
+    margin-top: 0; 
+    width: 100%;  
+}
+
+
+.listComponent {
+    width: '100%';
+    max-width: 360;
+    background-color: green;
+    position: 'relative';
+    overflow: 'auto';
+    max-Height: 300;  
+}
+
+.ul {
+    background-color: 'inherit';
+    padding: 0;
+}
+
+.listSection {
+    background-color: 'inherit';
+}
+

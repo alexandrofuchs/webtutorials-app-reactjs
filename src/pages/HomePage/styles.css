@@ -1,0 +1,33 @@
+.HomePage-root {
+    margin-top: auto;
+    width: 98%;
+    background-color: transparent;
+    flex-direction: column;
+}
+  
+.HomePage-main{
+    padding: 2%;
+    display: flex;    
+    justify-content: stretch;
+    width: 100%;  
+    flex-direction: row;
+}
+
+.HomePage-cardContainer{
+    display: flex;
+    flex-direction: column;
+    width: 100%;  
+}
+  
+.HomePage-card{
+    margin: 1mm;
+    display: flex;
+    width: 99%;
+    background-color: #fff;
+    flex-direction: row;
+}
+  
+.HomePage-sideBar {
+    margin: 1mm; 
+}
+  

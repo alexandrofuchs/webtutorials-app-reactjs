@@ -7,9 +7,10 @@ import NotFoundPage from '../../pages/NotFoundPage';
 export default function CommonRoutes() {
     return (
         <>
+            
             <Route exact path='/' component={HomePage} />
             <Route path='/course/id' component={CoursePage} />
-            <Route path="*" component={NotFoundPage} />
+            {/* <Route path='*' component={NotFoundPage} /> */}
         </>
     )
 }
