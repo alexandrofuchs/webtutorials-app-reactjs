@@ -1,0 +1,18 @@
+.root-virtualizedList {
+    width: '100%';
+    max-Width: 360;
+    position: relative;
+    overflow: auto;
+    max-Height: 100%;
+    background-color: white;
+    margin: 2mm;
+}
+
+.listSection-virtualizedList {
+  background-color: 'inherit';
+}
+
+.ul-virtualizedList {
+  background-color: 'inherit';
+  padding: 0;
+}

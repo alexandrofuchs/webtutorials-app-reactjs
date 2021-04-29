@@ -1,28 +1,12 @@
 import React from 'react';
 import {
-    makeStyles,
     CssBaseline,
-    Card,
     CardMedia,
     CardContent,
-    CardActions,
     Divider,
-    Grid,
     Typography,
-    Button,
-    CardActionArea,
-
 } from '@material-ui/core';
-import {
-    GitHub as GitHubIcon,
-    Facebook as FacebookIcon,
-    Twitter as TwitterIcon
-} from '@material-ui/icons';
-import Header from '../../containers/Header';
 import MainFeaturedPost from '../../containers/MainFeaturedPost';
-import FeaturedPost from '../../containers/FeaturePost';
-import Sidebar from '../../containers/Sidebar';
-import Footer from '../../containers/Footer';
 import './styles.css';
 import { Link } from 'react-router-dom';
 
@@ -35,21 +19,10 @@ const courses = [
 ];
 
 const mainFeaturedPost = {
-    title: 'Videos novos toda semana',
+    title: 'Tutorials Master!',
     description:
-        "Cursos de nivel iniciante ao mais avançado.",
+        "Sistema Web com o intuito de disponibilizar diversos tutoriais e exemplos práticos sobre assuntos diversos, organizados por categoria.",
     image: 'https://source.unsplash.com/random',
-};
-
-const sidebar = {
-    title: 'About',
-    description:
-        'Aplicação Streaming para oferta de cursos gratuitos e por assinatura.',
-    social: [
-        { name: 'GitHub', icon: GitHubIcon },
-        { name: 'Twitter', icon: TwitterIcon },
-        { name: 'Facebook', icon: FacebookIcon },
-    ],
 };
 
 function HomePage() {
@@ -61,7 +34,7 @@ function HomePage() {
             <Divider />
             <main className="HomePage-main">
                 <div className={"HomePage-cardContainer"}>
-                    <h1>Cursos de CourseName</h1>
+                    <h1>Postagens Recentes</h1>
                     <Divider />
                     {courses.map((course) => (
                         <Link to={`/course/id`}>
@@ -78,17 +51,8 @@ function HomePage() {
                         </Link>
                     ))}
                 </div>
-                {/* <Sidebar
-                    title={sidebar.title}
-                    description={sidebar.description}
-                    social={sidebar.social}
-                /> */}
             </main>
             <Divider />
-            <Footer
-                title="Footer"
-                description="Something here to give the footer a purpose!"
-            />
         </div>
     );
 }

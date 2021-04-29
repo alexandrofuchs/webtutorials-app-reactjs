@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   Card,
   CardActions,
@@ -6,10 +6,8 @@ import {
   Button,
   Link,
   Grid,
-  Box,
   Typography,
 } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
 import RequiredTextField from '../../components/TextFields/RequiredTextField';
 import ErrorAlert from '../../components/ErrorAlert';
 import Api from '../../services/api';
@@ -24,19 +22,6 @@ const UserRegister = async (firstName, lastName, email, password) => {
     password,
   });
   return res;
-}
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
 }
 
 export default function SignUp() {

@@ -1,0 +1,21 @@
+.root-markdownEditor {
+    display: flex;
+    flex-direction: row;  
+}
+  
+.main-markdownEditor{
+    display: flex;
+    flex-direction: row;
+}    
+
+.editor-markdownEditor{
+    width:50%;
+}
+
+.textArea-markdownEdidor {
+    width: 100%;
+}
+
+.postPreview-markdownEditor{
+    width:50%;
+}

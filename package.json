@@ -1,5 +1,5 @@
 {
-  "name": "webstreamingapp",
+  "name": "webtutorialsapp",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -12,10 +12,12 @@
     "jwt-decode": "^3.1.2",
     "lion-player": "^1.1.4",
     "markdown-to-jsx": "^7.1.2",
+    "marked": "^2.0.3",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "react-window": "^1.8.6",
     "web-vitals": "^1.1.1"
   },
   "scripts": {

@@ -2,17 +2,6 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import Api from '../../services/api';
 import jwtDecode from 'jwt-decode';
 
-const authenticate = async (username, password) => {
-    try {
-        return await Api.post('/authenticate', {
-            email: username,
-            password
-        });
-    } catch (err) {
-        return err.message;
-    }
-}
-
 const validateToken = async () => {
     try {
         return await Api.get('/validate-token');
@@ -39,9 +28,9 @@ export default function AuthenticateProvider({ children }) {
     const [signInError, setSignInError] = useState(null);
     const [authenticatedUser, setAuthenticatedUser] = useState(null);
 
-    const signIn = async (username, password) => {
+    const signIn = async (email, password) => {
         setLoading(true);
-        const res = await authenticate(username, password);
+        const res =  await Api.post('/authenticate', { email, password});
         console.log(res);
         if (res.error) {
             setSignInError(res.error);
@@ -50,6 +39,7 @@ export default function AuthenticateProvider({ children }) {
 
         Api.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`;
         let decoded = await jwtDecode(res.data.token);
+        console.log(decoded);
         localStorage.setItem("$Authenticate:token", res.data.token);
         localStorage.setItem("$Authenticate:user", JSON.stringify(decoded));
         setAuthenticatedUser(decoded);

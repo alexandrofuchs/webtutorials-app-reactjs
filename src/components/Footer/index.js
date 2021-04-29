@@ -1,9 +1,8 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
+import { Divider } from '@material-ui/core';
 
 function Copyright() {
   return (
@@ -22,7 +21,8 @@ function Footer(props) {
   const { description, title } = props;
 
   return (
-    <footer className="Footer">      
+    <footer className="Footer">   
+      <Divider/>   
         <Typography variant="h6" align="center" gutterBottom>
           {title}
         </Typography>
