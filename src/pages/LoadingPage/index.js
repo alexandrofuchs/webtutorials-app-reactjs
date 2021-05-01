@@ -1,4 +1,4 @@
 import React from 'react';
 
-const LoadingPage = () => <text>Loading...</text>
+const LoadingPage = () => <p>Loading...</p>
 export default LoadingPage;

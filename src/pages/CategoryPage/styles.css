@@ -1,32 +1,34 @@
-.root-categoryPage { 
-    display: flex; 
-    flex: 1;  
-    height: 100%;
-    width: 100%;  
-}
-
-.main-categoryPage{
+.root-CategoryPage { 
     display: flex;
-    flex-direction: column;
-    
+    flex-direction: row;    
+    width: 100%;
+    height: 100%;
+    background-color: green;    
 }
 
-
-.listComponent {
-    width: '100%';
-    max-width: 360;
-    background-color: green;
-    position: 'relative';
-    overflow: 'auto';
-    max-Height: 300;  
+.main-CategoryPage{
+    display: flex;
+    flex-direction: column;    
+    width: 100%;
+    height: 100%;
+    background-color: cyan;
 }
 
-.ul {
-    background-color: 'inherit';
-    padding: 0;
+.posts-CategoryPage {
+    display: flex;
+    flex-direction: column;    
+    background-color: red; 
+    overflow-y: scroll;     
 }
 
-.listSection {
-    background-color: 'inherit';
+.post-CategoryPage {
+    display: flex;    
+}
+
+img {
+    border-radius: 1mm;
+    margin: 1mm;
+    width: 150px;
+    height: 150px;
 }
 

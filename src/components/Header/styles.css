@@ -1,0 +1,23 @@
+.root-Header {
+  display: '';
+  width: 100%;
+  height: 300;
+} 
+
+.toolbar-Header {
+  border-bottom: 1px;
+}
+
+.toolbarTitle-Header {
+      flex: 1;
+}
+
+.toolbarSecondary-Header {
+      justify-content: 'space-between';
+      overflow-x: 'auto';
+}
+
+.toolbarLink-Header {
+  padding: 1;
+  flex-shrink: 0,
+}

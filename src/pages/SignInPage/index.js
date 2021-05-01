@@ -9,17 +9,20 @@ import {
 import RequiredTextField from '../../components/TextFields/RequiredTextField';
 import './styles.css';
 import { useAuthenticate } from '../../contexts/UserContext';
+import ErrorAlert from '../../components/ErrorAlert';
+import { Redirect } from 'react-router';
 
 export default function SignInPage() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { signIn, signInError } = useAuthenticate()
+  const { signIn, signInError } = useAuthenticate("")
 
   const onSubmit = async () => {
     const res = await signIn(email, password);
       console.log(res);
+      <Redirect to="/"/>
   }
 
   return (
@@ -44,32 +47,31 @@ export default function SignInPage() {
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
+              label="Lembrar me"
             />
+            <ErrorAlert message={signInError}/>
             <Button
               type="button"
               fullWidth
-              variant="contained"
-              color="primary"
-              className={""}
+              disabled={email.length < 3 || password.length < 8 }
+              className="submit-SignInPage"
               onClick={onSubmit}
             >
-              Sign In
+              Entrar
           </Button>
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
-                  Forgot password?
+                  Esqueceu sua senha?
               </Link>
               </Grid>
               <Grid item>
                 <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
+                  {"Não possui uma conta? Cadastre-se aqui!"}
                 </Link>
               </Grid>
             </Grid>
-          </form>
-          <text>{signInError}</text>
+          </form>          
         </div>
       </div>
     </>

@@ -5,7 +5,7 @@ import './styles.css';
 export default function ErrorAlert({ message }){
     return(
         <div className="erroralert">    
-            <span className="errortext">{message}</span>
+            <span className="errortext">{message ?? null}</span>
         </div>
     )
 }

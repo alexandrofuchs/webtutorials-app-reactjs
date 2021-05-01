@@ -1,11 +1,8 @@
 .root-virtualizedList {
-    width: '100%';
-    max-Width: 360;
-    position: relative;
-    overflow: auto;
-    max-Height: 100%;
-    background-color: white;
-    margin: 2mm;
+    width: 10%;
+    height: 90%;
+    flex-direction: column;   
+    background-color: blue; 
 }
 
 .listSection-virtualizedList {

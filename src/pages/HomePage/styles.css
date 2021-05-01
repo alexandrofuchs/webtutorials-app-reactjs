@@ -1,8 +1,8 @@
 .HomePage-root {
-    margin-top: auto;
-    width: 98%;
-    background-color: transparent;
-    flex-direction: column;
+    display: flex;
+    flex-direction: column;    
+    height: 100%;
+    width: 100%;
 }
   
 .HomePage-main{

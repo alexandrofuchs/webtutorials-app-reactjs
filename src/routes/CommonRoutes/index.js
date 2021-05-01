@@ -1,4 +1,4 @@
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import React from 'react';
 import HomePage from '../../pages/HomePage';
 import CategoryPage from '../../pages/CategoryPage';
@@ -13,7 +13,9 @@ export default function CommonRoutes() {
             <Route exact path='/' component={HomePage} />
             <Route path='/category/:id' component={CategoryPage} />
             <Route path='/post/:id/editor' component={PostEditorPage} />
-            {/* <Route path='*' component={NotFoundPage} /> */}
+            <Route path='*'>
+                <Redirect to="/"/>
+            </Route>
         </>
     )
 }

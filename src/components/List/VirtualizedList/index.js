@@ -8,7 +8,7 @@ export default function PinnedSubheaderList({ dataList }) {
 
   return (
     <>
-      <List className={"root-virtualizedList"} subheader={<li />}>
+      <List className={"root-virtualizedList"}>
         <h1>Subsessões</h1>
         {dataList.map((section) => (
           <ListItem className={"listSection-virtualizedList"} key={section.id} button>

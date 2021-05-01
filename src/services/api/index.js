@@ -30,7 +30,7 @@ const onRejected = err => {
         }
         return {
             data: null,
-            error: {title: "Connection Failed!"} ,
+            error: "Falha na conexão!" ,
         };
     } catch (err) {
         return {

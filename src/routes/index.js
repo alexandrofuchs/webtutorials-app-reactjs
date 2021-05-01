@@ -14,11 +14,13 @@ export default function Routes() {
         return <LoadingPage />
     }
     return (
-        <>           
-            <BrowserRouter>            
-            <Header title="Web Tutorials App" />
-                {signed ? <ProtectedRoutes /> : <PublicRoutes />}
-            <Footer/>      
+        <>
+            <BrowserRouter>
+                <Header title="Web Tutorials App" />
+                <div className="Main">
+                    {signed ? <ProtectedRoutes /> : <PublicRoutes />}
+                </div>                               
+                <Footer description={"alexandrofuchs"} />
             </BrowserRouter>
         </>
 

@@ -2,17 +2,6 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import Api from '../../services/api';
 import jwtDecode from 'jwt-decode';
 
-const validateToken = async () => {
-    try {
-        return await Api.get('/validate-token');
-    } catch (err) {
-        return { 
-            error: err.message, 
-            data: null 
-        };
-    }
-}
-
 const AuthenticateContext = createContext({
     signed: false,
     signIn: null,
@@ -30,42 +19,50 @@ export default function AuthenticateProvider({ children }) {
 
     const signIn = async (email, password) => {
         setLoading(true);
-        const res =  await Api.post('/authenticate', { email, password});
-        console.log(res);
-        if (res.error) {
-            setSignInError(res.error);
-            return setLoading(false);
-        }
+        if (email && password) {
+            const res = await Api.post('/authenticate', { email, password });
+            if (res.error) { 
+                console.log(res.error)    
+                setSignInError(res.error);
+                setLoading(false);
+                return;
+            }
 
-        Api.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`;
-        let decoded = await jwtDecode(res.data.token);
-        console.log(decoded);
-        localStorage.setItem("$Authenticate:token", res.data.token);
-        localStorage.setItem("$Authenticate:user", JSON.stringify(decoded));
-        setAuthenticatedUser(decoded);
+            Api.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`;
+            let decoded = await jwtDecode(res.data.token);
+            console.log(decoded);
+            localStorage.setItem("$Authenticate:token", res.data.token);
+            localStorage.setItem("$Authenticate:user", JSON.stringify(decoded));
+            setAuthenticatedUser(decoded);
+           
+        }
         setLoading(false);
     }
 
-    useEffect(() => {
-        setLoading(true);
-        const validateStoragedToken = async () => {
+        useEffect(() => {
+            
+            setLoading(true);
+            const validateStoragedToken = async () => {
 
-            const token = await localStorage.getItem("$Authenticate:token");
-            const user = await localStorage.getItem("$Authenticate:user");
-
-            if (token && user) {
-                Api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-                const res = await validateToken();
-                if (res.error) {
-                    signOut();
-                    return;
-                }                
-                setAuthenticatedUser(JSON.parse(user));
+                const token = await localStorage.getItem("$Authenticate:token");
+                const user = await localStorage.getItem("$Authenticate:user");
+             
+                if (token && user) {
+                    Api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+                    const res = await Api.get('user/validatetoken');
+                    
+                    if (res.error) {
+                        signOut();
+                        return;
+                    }
+                    if(res.data){
+                        setAuthenticatedUser(JSON.parse(user));
+                    }                   
+                }
             }
-        }
-        validateStoragedToken();
-        setLoading(false);                      
-    }, [])
+            validateStoragedToken();
+            setLoading(false)
+        }, [])
 
     const signOut = () => {
         localStorage.clear();
