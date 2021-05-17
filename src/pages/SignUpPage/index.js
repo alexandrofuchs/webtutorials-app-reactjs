@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, {  useState } from 'react';
 import {
-  Card,
   CardActions,
   CardContent,
   Button,
   Grid,
-  Typography,
 } from '@material-ui/core';
 import RequiredTextField from '../../components/TextFields/RequiredTextField';
 import ErrorAlert from '../../components/ErrorAlert';
@@ -15,11 +13,10 @@ import { useApp } from '../../contexts/AppContext';
 import { Link } from 'react-router-dom';
 
 const TryRegister = async (firstName, lastName, email, password) => {
-  let res = await Api.post('/user', {
+  let res = await Api.post('/user/register', {
     firstName,
     lastName,
     email,
-    userName: "",
     password,
   });
   return res;
@@ -51,7 +48,7 @@ export default function SignUpPage() {
   });
 
   const onSubmit = async () => {
-    setLoading(true)
+     setLoading(true)
 
     let res = await TryRegister(firstNameField.value, lastNameField.value, emailField.value, passwordField.value);
     
@@ -63,8 +60,12 @@ export default function SignUpPage() {
         if (res.error.errors.Email) { setEmailField({ errors: res.error.errors.Email }); }
         if (res.error.errors.Password) { setPasswordField({ value: "", errors: res.error.errors.Password }); }
       }      
+    }else{ 
+      setLoading(false)
+      window.location = '/signin'
     }
     setLoading(false)
+    
  
   }
 
@@ -100,7 +101,7 @@ export default function SignUpPage() {
             error={passwordField.errors ? passwordField.errors.map(e => e) : ""}
           />
           <RequiredTextField
-            id="repeatPassword"
+            id="password"
             autoComplete="password"
             label="Repetir senha"
             onChange={event => setRepeatPasswordField({ value: event.target.value })}

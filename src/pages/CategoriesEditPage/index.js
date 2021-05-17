@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import UseStyles from './styles';
 import {
     Button,
-    Input,
-    ListItemText,
     Table,
     TableRow,
     TableHead,
@@ -114,7 +112,7 @@ export default function CategoriesEditPage() {
                             </TableCell>
                             <TableCell align="right">{row.createdAt}</TableCell>
                             <TableCell align="right">{row.updatedAt}</TableCell>
-                            <TableCell align="right"><Link to={`/category/${row.id}/sections`}>Seções</Link></TableCell>
+                            <TableCell align="right"><Link to={`/category/${row.id}/sections`}><Button>Seções</Button></Link></TableCell>
                         </TableRow>
                     ))}
                 </TableBody>

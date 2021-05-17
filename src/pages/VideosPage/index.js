@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import {
   CssBaseline,
   Divider,
-  Typography,
   Button,
   List,
   ListItem,
@@ -12,7 +11,6 @@ import { useParams } from 'react-router';
 import Api from '../../services/api';
 import { Link } from 'react-router-dom';
 import UseStyles from './styles';
-import RequiredTextField from '../../components/TextFields/RequiredTextField';
 
 export default function VideosPage() {
 
@@ -47,25 +45,6 @@ export default function VideosPage() {
     }
   }
 
-  const [selectedVideo, setSelectedVideo] = useState({
-    createdAt: "",
-    fileName: "",
-    filePath: "",
-    id: "",
-    sectionId: "",
-    storagedFileName: "",
-    updatedAt: ""
-  });
-
-  const onClickVideo = async (event) => {
-    console.log(event.target.offsetParent.id)
-    const res = await Api.get(`/video/${event.target.offsetParent.id}`);
-    if(res.data){
-      console.log(res.data)
-      setSelectedVideo(res.data.data)
-    }
-  }
-
   const onClickRemove = async (event) => {
     const res =  await Api.delete(`/video/${event.target.offsetParent.id}/remove`);
     console.log(res);
@@ -79,24 +58,9 @@ export default function VideosPage() {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      {/* {/* <div className={classes.menu}> */}
-             
-       
-        {/* <List className={classes.form} >
-            {section.videos.map(
-                video => (
-                    <>
-                        <ListItem button key={video.id} id={video.id} onClick={onClickVideo} selected={(video.fileName === selectedVideo)} >
-                            <ListItemText primary={video.storagedFileName} />
-                        </ListItem>
-                        <Divider />
-                    </>
-                ))}
-        </List>
-      </div> */}
       <Divider orientation="vertical" flexItem />
       <div className={classes.content}>
-      <Link to={`/section/${id}/video/upload`}><ListItem>Enviar Novo Video</ListItem></Link>  
+      <Link to={`/section/${id}/video/upload`}><Button>Enviar Novo Video</Button></Link>  
      
         <h1>Videos</h1> 
         <Divider />       

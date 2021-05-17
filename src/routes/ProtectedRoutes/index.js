@@ -1,7 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import UserPage from '../../pages/UserPage';
-import VideoPage from '../../pages/VideoPage';
 
 import CommonRoutes from '../CommonRoutes';
 

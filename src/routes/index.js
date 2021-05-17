@@ -7,7 +7,6 @@ import LoadingPage from '../pages/LoadingPage';
 import { useAuthenticate } from '../contexts/UserContext';
 import { useApp } from '../contexts/AppContext';
 import Header from '../components/Header';
-import Footer from '../components/Footer';
 
 export default function Routes() {
     const { signed, isUserAdmin } = useAuthenticate();
@@ -21,8 +20,7 @@ export default function Routes() {
             <Header title="Web Tutorials App" />
             <div className="Main">
                 {signed ? (isUserAdmin ? <AdminRoutes /> : <ProtectedRoutes />) : <PublicRoutes />}
-            </div>
-            {/* <Footer description={"alexandrofuchs"} /> */}
+            </div> 
         </BrowserRouter>
     )
 }

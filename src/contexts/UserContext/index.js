@@ -8,16 +8,14 @@ const AuthenticateContext = createContext({
     signIn: null,
     signOut: null,
     loading: false,
-    //signInError: null,
     authenticatedUser: null,
     isUserAdmin: false,
 });
 
 export default function AuthenticateProvider({ children }) {
 
-    const { error, setError, loading, setLoading } = useApp();
+    const { setError, loading, setLoading } = useApp();
 
-    // const [signInError, setSignInError] = useState(null);
     const [authenticatedUser, setAuthenticatedUser] = useState(null);
 
     const signIn = async (email, password) => {
@@ -26,7 +24,6 @@ export default function AuthenticateProvider({ children }) {
             const res = await Api.post('/authenticate', { email, password });
             if (res.error) { 
                 setError(res.error)
-                //setSignInError(res.error);
                 setLoading(false);
                 return;
             }

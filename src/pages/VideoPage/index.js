@@ -2,7 +2,6 @@ import React from 'react';
 
 export default function VideoPage(){
 
-
     const fileName = "byq0b0l2.ocm"
 
     return(

@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { Card, CardContent, TextField, Button, CircularProgress, Typography } from '@material-ui/core';
+import React, { useState } from 'react';
+import { Card, CardContent, TextField, Button, CircularProgress } from '@material-ui/core';
 import UseStyles from './styles';
 import ErrorAlert from '../../components/ErrorAlert';
 
 import Api from '../../services/api';
-import DefaultButton from '../../components/Button';
 import { Redirect, useParams } from 'react-router';
 
 export default function UploadVideoPage() {
@@ -70,10 +69,10 @@ export default function UploadVideoPage() {
     <Card className={classes.card}>
       <CardContent className={classes.cardContent}>
         {uploading ?
-          (<>
+          (<div style={{display: 'flex', justifyContent: 'center', alignItems: "center"}}>
             <h3>Enviando video</h3>
             <CircularProgress variant="determinate" value={progressUploadedFile} />
-          </>)
+          </div>)
           :
           (<>
             <h3>Enviar video</h3>

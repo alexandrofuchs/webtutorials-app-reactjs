@@ -5,13 +5,14 @@ import { makeStyles } from '@material-ui/core/styles';
 import {
     Button,
     Table,
-    TablePagination,
     TableBody,
     TableCell,
     TableHead,
     TableRow,
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import RequiredTextField from '../../components/TextFields/RequiredTextField';
+import ErrorAlert from '../../components/ErrorAlert';
 
 const useStyles = makeStyles({
     table: {
@@ -36,12 +37,7 @@ export default function SectionsPage() {
 
     const { id } = useParams()
 
-    const [page, setPage] = React.useState(0);
-
-
-    const handleChangePage = (event, newPage) => {
-        setPage(newPage);
-    };
+    const [description, setDescription] = useState("");
 
 
     const [data, setData] = useState({
@@ -53,21 +49,60 @@ export default function SectionsPage() {
         totalPages: 0
     })
 
+    const [error, setError] = useState(null);
+
+    const tryCreateSection  = async () => {
+        const res = await Api.post(`/category/${id}/section`, { description });       
+        if(!!res.data){
+            console.log(res.data);
+            fetchSections()
+            setCreateNategory(false);
+        }
+        if(!!res.error){
+            console.log(res.error);
+            setError("Invalid Description");
+        }       
+     } 
+ 
+
     const fetchSections = async () => {
         const res = await Api.get(`/category/${id}/sections`);
         if (res.data) {
-            setData(res.data)
+            console.log(res.data);
+            setData(res.data)            
         }
+        
+    }
+
+    const onClickCreateSection = () => {
+        setCreateNategory(!createCategory);
     }
 
     useEffect(() => {
         fetchSections()
     }, [id])
 
+    const [createCategory, setCreateNategory] = useState(false);
+
     return (
         <div className={classes.root}>
             <h1>Seções</h1>
-            <Button>Upload Video</Button>
+            <ErrorAlert message={error} />
+            {createCategory ? 
+                <form>
+                    <RequiredTextField
+                        id={"description"}
+                        label={"Descrição"}
+                        value={description}
+                        onChange={(event) => setDescription(event.target.value)}
+                        onClick={() => { }}
+                    />
+                    <Button onClick={tryCreateSection}>Confirmar</Button>
+                    
+                </form>            
+            : 
+            <Button onClick={onClickCreateSection}>Criar Seção</Button>}            
+
             <Table>
                 <TableHead>
                     <TableRow>
@@ -79,7 +114,22 @@ export default function SectionsPage() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {data.data.map((row) => (
+                    {data.data.map((row) => {
+                        
+                        const onClickRemove = async () => {
+                            const res = await Api.delete(`/section/${row.id}`);
+                            console.log(res)
+                            if(!!res.data){
+                                console.log(res.data)
+                                fetchSections()
+                            }else{
+                                if(!!res.error){
+                                    setError(res.error)
+                                }                             
+                            }
+                        }
+
+                        return(
                         <TableRow key={row.id} hover >
                             <TableCell />
                             <TableCell component="th" scope="row">
@@ -87,20 +137,16 @@ export default function SectionsPage() {
                             </TableCell>
                             <TableCell align="right">{row.createdAt}</TableCell>
                             <TableCell align="right">{row.updatedAt}</TableCell>
-                            <TableCell align="right"><Link to={`/section/${row.id}/videos`}>Videos</Link></TableCell>
+                            <TableCell align="right">
+                                <Button onClick={onClickRemove} >Remover</Button>
+                                <Link to={`/section/${row.id}/videos`}><Button>Videos</Button></Link>
+                                </TableCell>
                         </TableRow>
+                        )})}
 
-                    ))}
+                    
                 </TableBody>
             </Table>
-            <TablePagination
-                rowsPerPageOptions={[data.maxPageItems]}
-                component="div"
-                rowsPerPage={data.maxPageItems}
-                page={page}
-                count={data.totalItems}
-                onChangePage={handleChangePage}
-            />
         </div>
     )
 }

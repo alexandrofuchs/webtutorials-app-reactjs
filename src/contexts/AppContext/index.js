@@ -11,8 +11,6 @@ export default function AppProvider({ children }) {
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    
-    const handleLoading = (value) => setLoading(value);
     const handleError = (error) => setError(error)
     const clearError = () =>  setError(null);
 

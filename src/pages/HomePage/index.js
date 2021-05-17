@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {
-    CardMedia,
-    Paper,
-    CardContent,
     List,
-    Divider,
-    Typography,    
+    Divider,   
 } from '@material-ui/core';
 import MainFeaturedPost from '../../components/MainFeaturedPost';
 import UseStyles from './styles.js';

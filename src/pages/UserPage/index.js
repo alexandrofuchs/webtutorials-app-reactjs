@@ -18,6 +18,8 @@ export default function UserPage() {
         UpdatedAt: "",  
     });
 
+
+
     const MenuOptions = [
         {title:'Dados', url: '#'}, 
         {title:'Favoritos', url: '#'}, 
@@ -47,7 +49,7 @@ export default function UserPage() {
                     </>                               
                 ))}
             </List>              
-                <UserData user={user}/>          
+                <UserData user={user} setUser={setUser}/>          
             </div>
             
         </div>

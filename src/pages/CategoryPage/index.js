@@ -80,17 +80,51 @@ export default function CategoryPage() {
         fetchSectionWithVideos(event.target.offsetParent.id);
         setSelectedVideo(null)
     }
-
-    const onClickVideo = (event) => {
-        setSelectedVideo(event.target.offsetParent.id);
+    
+    const onClickVideo = async (event) => {
+        setSelectedVideo(event.target.offsetParent.id)
     }
 
     const onClickBackToSection = () =>{
         setSelectedVideo(null)
+
     }
 
     useEffect(() => {
         setSelectedVideo(null);
+        setSection({
+                description: "",
+                categoryId: "",
+                videos: [
+                    {
+                        fileName: "",
+                        storagedFileName: "",
+                        filePath: "",
+                        sectionId: "",
+                        id: "",
+                        createdAt: "",
+                        updatedAt: ""
+                    }
+                ],
+                id: "",
+                createdAt: "",
+                updatedAt: ""
+            })
+        setCategory({
+            description: "",
+            sections: [
+                {
+                    description: "",
+                    categoryId: "",
+                    id: "",
+                    createdAt: "",
+                    updatedAt: ""
+                }
+            ],
+            id: "",
+            createdAt: "",
+            updatedAt: ""
+        })
         fetchCategory();
     }, [id])
 
@@ -157,7 +191,7 @@ export default function CategoryPage() {
                     </div>
                     <Divider orientation="vertical" flexItem />
                     <div className={classes.content}>                      
-                            <h1>{selectedVideo}</h1>
+                            <h1>{selectedVideo.storagedFileName}</h1>
                             <VideoPlayerComponent />                   
                     </div>
                 </>
