@@ -1,11 +1,10 @@
-.signUpCard{
+.root-SignUpPage{
     padding: 5px;
     display: flex;
     flex-direction: column;
     align-items: center;
     height: 90vh;
-    width: 80%;
-    background-color: greenyellow;
+    width: 80%;    
 }
 
 .signUpCardContent{

@@ -1,55 +1,73 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     CardMedia,
+    Paper,
     CardContent,
+    List,
     Divider,
-    Typography,
+    Typography,    
 } from '@material-ui/core';
 import MainFeaturedPost from '../../components/MainFeaturedPost';
-import './styles.css';
+import UseStyles from './styles.js';
 import { Link } from 'react-router-dom';
-
-const courses = [
-    { id: 0, categoryId: 0, description: 'Programação Orientada a Objetos com C#', url: '#' },
-    { id: 1, categoryId: 1, description: 'Fundamentos de Bando de Dados', url: '#' },
-    { id: 2, categoryId: 1, description: 'Sistemas Gerenciadores de Banco de Dados', url: '#' },
-    { id: 3, categoryId: 4, description: 'Fundamentos de Redes de computadores', url: '#' },
-    { id: 4, categoryId: 4, description: 'Segurança em redes de computadores', url: '#' },
-    { id: 2, categoryId: 1, description: 'Sistemas Gerenciadores de Banco de Dados', url: '#' },
-    { id: 3, categoryId: 4, description: 'Fundamentos de Redes de computadores', url: '#' },
-    { id: 4, categoryId: 4, description: 'Segurança em redes de computadores', url: '#' },
-];
+import Api from '../../services/api';
 
 const mainFeaturedPost = {
     title: 'Tutorials Master!',
     description:
         "Sistema Web com o intuito de disponibilizar diversos tutoriais e exemplos práticos sobre assuntos diversos, organizados por categoria.",
-    image: 'https://source.unsplash.com/random',
+    image: '#',
 };
 
 function HomePage() {
+
+    const classes = UseStyles();
+
+    const [data, setData] = useState([{
+        createdAt: "",
+        fileName: "",
+        filePath: "",
+        id: "",
+        section: null,
+        sectionId: "",
+        storagedFileName: "",
+        updatedAt: "",
+    }]); 
+
+    const fetchVideos = async () => {
+        const res = await Api.get('/videos');
+        console.log(res);
+        if(res.data){
+            setData(res.data.data);
+        }
+    }
+
+    useEffect(()=>{
+        fetchVideos();
+    },[])
+
     return (
         <>
-            <div className="HomePage-root">
+            <div className={classes.root}>
                 <MainFeaturedPost post={mainFeaturedPost} />
                 <h1>
                     Postagens Recentes
                 </h1>
-                {courses.map((course) => (
-                    <Link key={course.id} to={`/course/id`} >
-                        <Divider />
-                        <CardContent>
-                            <CardMedia
-                                image="https://source.unsplash.com/random"
-                                title="Image title"
-                            />
-                            <Typography gutterBottom variant="h5" component="h2">
-                                {course.description}
-                            </Typography>
-                        </CardContent>
-                    </Link>
-                ))}    
-                <Divider />
+                <List className={classes.form} >
+                    {data.map((item) => (
+                        <Link key={item.id} to={`/video/${item.fileName}`} >
+                            <div className={classes.itemList}>
+                                {/* <img
+                                    src="https://source.unsplash.com/random"
+                                    title="Image title" /> */}
+                                <h3 gutterBottom variant="h5" component="h2">
+                                    {item.storagedFileName}
+                                </h3>
+                            </div>
+                            <Divider />
+                        </Link>
+                    ))}
+                </List>       
             </div>
         </>
     );

@@ -10,11 +10,13 @@ import { useAuthenticate } from '../../../contexts/UserContext';
 import './styles.css';
 export default function UserMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const { authenticatedUser, signOut } = useAuthenticate();
+  const { authenticatedUser, isUserAdmin, signOut } = useAuthenticate();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
+
 
   const onSignOut = () => {
     handleClose();
@@ -38,8 +40,8 @@ export default function UserMenu() {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose}><Link to={`/user/${authenticatedUser.Id}/config`}>Configurações</Link></MenuItem>
-        <MenuItem onClick={handleClose}><Link to={"#"}>Favoritos</Link></MenuItem>
+        <MenuItem onClick={handleClose}><Link to={`/user/${authenticatedUser.Id}/config`}>Configurações do usuário</Link></MenuItem>
+        { isUserAdmin ? <MenuItem onClick={handleClose}><Link to={`/categories`}>Configurações da Pagina</Link></MenuItem> : null }
         <MenuItem onClick={onSignOut}>Sair</MenuItem>
       </Menu>
     </>

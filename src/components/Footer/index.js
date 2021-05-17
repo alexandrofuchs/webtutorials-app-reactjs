@@ -2,6 +2,7 @@ import * as React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import { Divider } from '@material-ui/core';
+import '../../styles.css';
 
 function Copyright() {
   return (

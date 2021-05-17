@@ -32,8 +32,7 @@ export default function UserPage() {
     return (
 
         <div className="root-UserPage">
-            <h1>{`Olá, ${user.FirstName} `}</h1>
-            
+            <h1>{`Olá, ${user.FirstName} `}</h1>            
             <div className="main-UserPage">
             <Divider/>
             <List>

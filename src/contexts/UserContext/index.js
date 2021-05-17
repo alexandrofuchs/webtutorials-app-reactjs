@@ -1,20 +1,23 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import Api from '../../services/api';
 import jwtDecode from 'jwt-decode';
+import { useApp } from '../AppContext';
 
 const AuthenticateContext = createContext({
     signed: false,
     signIn: null,
     signOut: null,
     loading: false,
-    signInError: null,
+    //signInError: null,
     authenticatedUser: null,
+    isUserAdmin: false,
 });
 
 export default function AuthenticateProvider({ children }) {
 
-    const [loading, setLoading] = useState(true);
-    const [signInError, setSignInError] = useState(null);
+    const { error, setError, loading, setLoading } = useApp();
+
+    // const [signInError, setSignInError] = useState(null);
     const [authenticatedUser, setAuthenticatedUser] = useState(null);
 
     const signIn = async (email, password) => {
@@ -22,15 +25,14 @@ export default function AuthenticateProvider({ children }) {
         if (email && password) {
             const res = await Api.post('/authenticate', { email, password });
             if (res.error) { 
-                console.log(res.error)    
-                setSignInError(res.error);
+                setError(res.error)
+                //setSignInError(res.error);
                 setLoading(false);
                 return;
             }
 
             Api.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`;
             let decoded = await jwtDecode(res.data.token);
-            console.log(decoded);
             localStorage.setItem("$Authenticate:token", res.data.token);
             localStorage.setItem("$Authenticate:user", JSON.stringify(decoded));
             setAuthenticatedUser(decoded);
@@ -71,7 +73,7 @@ export default function AuthenticateProvider({ children }) {
     }
 
     return (
-        <AuthenticateContext.Provider value={{ signed: !!authenticatedUser, authenticatedUser, signIn, signOut, loading, signInError }}>
+        <AuthenticateContext.Provider value={{ signed: !!authenticatedUser, authenticatedUser, isUserAdmin: (!!authenticatedUser && authenticatedUser.role === "admin")? true:false, signIn, signOut, loading }}>
             {children}
         </AuthenticateContext.Provider>
     )

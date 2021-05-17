@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Card,
   CardActions,
   CardContent,
   Button,
-  Link,
   Grid,
   Typography,
 } from '@material-ui/core';
@@ -12,8 +11,10 @@ import RequiredTextField from '../../components/TextFields/RequiredTextField';
 import ErrorAlert from '../../components/ErrorAlert';
 import Api from '../../services/api';
 import './styles.css';
+import { useApp } from '../../contexts/AppContext';
+import { Link } from 'react-router-dom';
 
-const UserRegister = async (firstName, lastName, email, password) => {
+const TryRegister = async (firstName, lastName, email, password) => {
   let res = await Api.post('/user', {
     firstName,
     lastName,
@@ -24,8 +25,10 @@ const UserRegister = async (firstName, lastName, email, password) => {
   return res;
 }
 
-export default function SignUp() {
+export default function SignUpPage() {
 
+  const {error, setError, setLoading  } = useApp();
+ 
   const [firstNameField, setFirstNameField] = useState({
     value: "",
     errors: null,
@@ -47,63 +50,59 @@ export default function SignUp() {
     errors: null,
   });
 
-  const [error, setError] = useState(null);
-
   const onSubmit = async () => {
+    setLoading(true)
 
-    let res = await UserRegister(firstNameField.value, lastNameField.value, emailField.value, passwordField.value);
-
-    console.log(res);
-
-    if (res.error) {
-      setError(res.error.title)
+    let res = await TryRegister(firstNameField.value, lastNameField.value, emailField.value, passwordField.value);
+    
+    if (res.error) {         
+      setError(res.error);
       if (res.error.errors) {
         if (res.error.errors.FirstName) { setFirstNameField({ errors: res.error.errors.FirstName }) };
         if (res.error.errors.LastName) { setLastNameField({ errors: res.error.errors.LastName }); }
         if (res.error.errors.Email) { setEmailField({ errors: res.error.errors.Email }); }
         if (res.error.errors.Password) { setPasswordField({ value: "", errors: res.error.errors.Password }); }
-      }
-      return;
+      }      
     }
+    setLoading(false)
+ 
   }
 
   return (
-    <Card className="signUpCard">
-      <Typography component="h1" variant="h5">
-        Sign up
-      </Typography>
+    <div className={"root-SignUpPage"}>
+      <h1>Criar conta</h1>
       <CardContent className="signUpCardContent">
         <ErrorAlert message={error ? error : ""} />
         <form className={"form"} noValidate>
           <RequiredTextField
             id="firstName"
-            label="First Name"
+            label="Nome"
             autoFocus={true}
             onChange={event => setFirstNameField({ value: event.target.value })}
             error={firstNameField.errors ? firstNameField.errors.map(e => e) : ""}
           />
           <RequiredTextField
             id="lastName"
-            label="Last Name"
+            label="Sobrenome"
             onChange={event => setLastNameField({ value: event.target.value })}
             error={lastNameField.errors ? lastNameField.errors.map(e => e) : ""}
           />
           <RequiredTextField
             id="email"
-            label="Email Address"
+            label="Email"
             onChange={event => setEmailField({ value: event.target.value })}
             error={emailField.errors ? emailField.errors.map(e => e) : ""}
           />
           <RequiredTextField
             id="password"
-            label="Password"
+            label="Senha"
             onChange={event => setPasswordField({ value: event.target.value })}
             error={passwordField.errors ? passwordField.errors.map(e => e) : ""}
           />
           <RequiredTextField
             id="repeatPassword"
             autoComplete="password"
-            label="Repeat Password"
+            label="Repetir senha"
             onChange={event => setRepeatPasswordField({ value: event.target.value })}
             error={repeatPasswordField.errors ? repeatPasswordField.errors.map(e => e) : ""}
           />
@@ -111,29 +110,23 @@ export default function SignUp() {
       </CardContent>
       <CardActions className="signUpCardActions">
         <Button
-          type="button"
-          className={"submit"}
           fullWidth
-          variant="contained"
-          color="primary"
+          variant="default"
           onClick={onSubmit}
         >
           Sign Up
           </Button>
       </CardActions>
-
       <Grid container justify="flex-end">
         <Grid item>
-          <Link href="/signin" variant="body2">
-            Already have an account? Sign in
+          <Link to="/signin" variant="body2">
+            Já tem uma conta? Entrar
           </Link>
         </Grid>
       </Grid>
 
-    </Card>
-    // <Box mt={5}>
-    //   <Copyright />
-    // </Box>
-    // </>
+    </div>
+   
+
   );
 }

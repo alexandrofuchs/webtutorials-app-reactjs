@@ -22,11 +22,10 @@ export default function CategoriesMenu() {
   
     useEffect(() => {
       const fetchData = async () => {
-        const res = await Api.get('/category');
+        const res = await Api.get('/categories');
         if (res.data) {
-          if (res.data.categories) {
-            setCategories(res.data.categories);
-          }
+            console.log(res.data)
+            setCategories(res.data.data);          
         }
       }
       fetchData();

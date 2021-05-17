@@ -3,26 +3,26 @@ import {
   Button,
   FormControlLabel,
   Checkbox,
-  Link,
   Grid,
 } from '@material-ui/core';
 import RequiredTextField from '../../components/TextFields/RequiredTextField';
 import './styles.css';
 import { useAuthenticate } from '../../contexts/UserContext';
 import ErrorAlert from '../../components/ErrorAlert';
-import { Redirect } from 'react-router';
+import {  Link } from 'react-router-dom';
+import { useApp } from '../../contexts/AppContext';
 
 export default function SignInPage() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { signIn, signInError } = useAuthenticate("")
+  const { signIn } = useAuthenticate();
+  const { error } = useApp()
 
   const onSubmit = async () => {
-    const res = await signIn(email, password);
-      console.log(res);
-      <Redirect to="/"/>
+     await signIn(email, password);
+   
   }
 
   return (
@@ -49,7 +49,7 @@ export default function SignInPage() {
               control={<Checkbox value="remember" color="primary" />}
               label="Lembrar me"
             />
-            <ErrorAlert message={signInError}/>
+            <ErrorAlert message={error}/>
             <Button
               type="button"
               fullWidth
@@ -66,8 +66,8 @@ export default function SignInPage() {
               </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
-                  {"Não possui uma conta? Cadastre-se aqui!"}
+                <Link to="/signup" variant="body2">
+                  {"Não possui uma conta? Crie aqui!"}
                 </Link>
               </Grid>
             </Grid>

@@ -3,19 +3,18 @@ import React from 'react';
 import HomePage from '../../pages/HomePage';
 import CategoryPage from '../../pages/CategoryPage';
 //import NotFoundPage from '../../pages/NotFoundPage';
-import PostEditorPage from '../../pages/PostEditorPage';
-
+import VideoPage from '../../pages/VideoPage';
 
 export default function CommonRoutes() {
 
     return (
         <>
             <Route exact path='/' component={HomePage} />
-            <Route path='/category/:id' component={CategoryPage} />
-            <Route path='/post/:id/editor' component={PostEditorPage} />
-            <Route path='*'>
-                <Redirect to="/"/>
-            </Route>
+            <Route exact path='/category/:id' component={CategoryPage} />
+            <Route exact path='/video/:id' component={VideoPage}/>
+            {/* <Route path='*'>
+                <Redirect to="/signin"/>
+            </Route> */}
         </>
     )
 }
